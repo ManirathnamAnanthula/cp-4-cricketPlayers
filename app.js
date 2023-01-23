@@ -60,7 +60,9 @@ app.post("/players/", async (request, response) => {
   VALUES
     ('${playerName}', ${jerseyNumber}, '${role}');`;
   const player = await db.run(postPlayerQuery);
-  response.send("Player Added to Team");
+const playerId = player.lastID;
+
+  response.send({ playerId: playerId });
 });
 
 app.get("/players/:playerId/", async (request, response) => {
